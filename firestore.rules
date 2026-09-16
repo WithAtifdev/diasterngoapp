@@ -1,0 +1,58 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper predicates based on the app's actual auth model.
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(uid) {
+      return isSignedIn() && request.auth.uid == uid;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && request.auth.token.admin == true;
+    }
+
+    // users/{uid} is the app's per-user profile document.
+    // ProfileService fetches users via Firebase Auth uid and writes the profile
+    // to that same uid document.
+    match /users/{uid} {
+      allow get: if isOwner(uid);
+      allow list: if false;
+      allow create: if isOwner(uid)
+        && request.resource.data.keys().hasOnly(['name','email','role','photoUrl'])
+        && request.resource.data.name is string
+        && request.resource.data.email is string
+        && request.resource.data.role in ['volunteer', 'ngo', 'admin'];
+      allow update: if isOwner(uid)
+        && request.resource.data.keys().hasOnly(['name','email','role','photoUrl'])
+        && request.resource.data.name is string
+        && request.resource.data.email is string
+        && request.resource.data.role in ['volunteer', 'ngo', 'admin'];
+      allow delete: if false;
+    }
+
+    // alerts/{id} are official/public disaster alerts.
+    // The app reads alerts publicly through AlertService.officialAlertStream.
+    // No normal UI write path reaches addAlert(); admin/trusted backend writes should
+    // be enforced by admin custom claims or backend invocation.
+    match /alerts/{alertId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // ngos/{id} hold public NGO directory records.
+    // The app reads ngos without auth and allows NGO registration from screens.
+    // To preserve existing view behavior while keeping the create path authenticated,
+    // the read is left public. Update/delete are restricted to admin/trusted backend
+    // or an authenticated user/admin custom-claim holder.
+    match /ngos/{ngoId} {
+      allow read: if true;
+      allow create: if isSignedIn();
+      allow update, delete: if isAdmin();
+    }
+  }
+}

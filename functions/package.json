@@ -1,0 +1,13 @@
+{
+  "name": "diaster-ngo-functions",
+  "description": "Firebase Cloud Functions for disaster notification sending.",
+  "main": "index.js",
+  "engines": {
+    "node": "22"
+  },
+  "dependencies": {
+    "firebase-admin": "^14.4.0",
+    "firebase-functions": "^7.3.2"
+  },
+  "private": true
+}

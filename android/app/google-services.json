@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "591643758384",
+    "project_id": "diasterngoapp-4f51a",
+    "storage_bucket": "diasterngoapp-4f51a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:591643758384:android:dde513fb459bce626102f5",
+        "android_client_info": {
+          "package_name": "com.example.diaster_ngo_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFrWhZBm92RvOtejXVNnDwPW_odJHUmMs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
