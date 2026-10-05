@@ -1,5 +1,5 @@
 
-import 'package:diaster_ngo_app/features/auth/view/login_screen.dart';
+import 'package:diaster_ngo_app/features/auth/view/sigin.dart';
 import 'package:diaster_ngo_app/navigationmenu.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

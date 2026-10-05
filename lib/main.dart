@@ -43,7 +43,6 @@ Future<void> _bgHandler(RemoteMessage message) async {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -105,9 +104,7 @@ class MyApp extends StatelessWidget {
           create: (_) => ProfileService(),
         ),
 
-        /// =================================
-        /// AUTH VIEW MODEL
-        /// =================================
+
         ChangeNotifierProvider(
           create:
               (ctx) => AuthViewModel(
@@ -115,9 +112,6 @@ class MyApp extends StatelessWidget {
           ),
         ),
 
-        /// =================================
-        /// HOME VIEW MODEL
-        /// =================================
         ChangeNotifierProvider(
           create:
               (ctx) => HomeViewModel(
@@ -129,9 +123,6 @@ class MyApp extends StatelessWidget {
           ),
         ),
 
-        /// =================================
-        /// ALERTS VIEW MODEL
-        /// =================================
         ChangeNotifierProvider(
           create:
               (ctx) => AlertsViewModel(
@@ -139,9 +130,6 @@ class MyApp extends StatelessWidget {
           ),
         ),
 
-        /// =================================
-        /// NGO VIEW MODEL
-        /// =================================
         ChangeNotifierProvider(
           create:
               (ctx) => NGOViewModel(
@@ -149,9 +137,6 @@ class MyApp extends StatelessWidget {
           ),
         ),
 
-        /// =================================
-        /// NGO REGISTER VIEW MODEL
-        /// =================================
         ChangeNotifierProvider(
           create:
               (ctx) =>
@@ -161,31 +146,20 @@ class MyApp extends StatelessWidget {
               ),
         ),
 
-        /// =================================
-        /// PROFILE VIEW MODEL
-        /// =================================
         ChangeNotifierProxyProvider<
-            AuthViewModel,
-            ProfileViewModel>(
+            AuthViewModel,ProfileViewModel>(
           create:
               (ctx) => ProfileViewModel(
             service: ctx.read<ProfileService>(),
           ),
 
-          update: (context,
-              authVm,
-              previous,
-              ) {
+          update: (context, authVm, previous) {
             if (previous == null) {
               return ProfileViewModel(
                 service: context.read<ProfileService>(),
               );
             }
-
-            previous.updateAuth(
-              authVm,
-            );
-
+            previous.updateAuth(authVm);
             return previous;
           },
         ),
@@ -197,9 +171,7 @@ class MyApp extends StatelessWidget {
         navigatorKey: appNavigatorKey,
         title:
         'Disaster & NGO Community App',
-
         theme: AppTheme.darkTheme,
-
         home: const Splaschscreen(),
       ),
     );

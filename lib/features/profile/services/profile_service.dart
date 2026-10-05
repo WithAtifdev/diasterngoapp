@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:diaster_ngo_app/features/profile/model/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+import '../model/app_user_model.dart';
 
 
 class ProfileService {

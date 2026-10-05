@@ -11,9 +11,9 @@ class RiskBanner extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: risk.color.withValues(alpha: 0.12),
+        color: risk.level.color.withValues(alpha: 0.12),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: risk.color.withValues(alpha: 0.4)),
+        border: Border.all(color: risk.level.color.withValues(alpha: 0.4)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -23,13 +23,13 @@ class RiskBanner extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: BoxDecoration(
-                  color: risk.color.withValues(alpha: 0.2),
+                  color: risk.level.color.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
-                  '${risk.emoji} Risk Level: ${risk.label}',
+                  '${risk.level.emoji} Risk Level: ${risk.level.label}',
                   style: TextStyle(
-                    color: risk.color,
+                    color: risk.level.color,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
@@ -38,7 +38,7 @@ class RiskBanner extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 14),
-          Text(risk.headline,
+          Text(risk.level.headline,
               style: const TextStyle(
                   color: Colors.white, fontSize: 17, fontWeight: FontWeight.w600)),
           const SizedBox(height: 16),
@@ -55,7 +55,7 @@ class RiskBanner extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               border: Border.all(color: Colors.white10),
             ),
-            child: Text(risk.recommendation,
+            child: Text(risk.level.recommendation,
                 style: const TextStyle(color: Colors.white70, fontSize: 14, height: 1.5)),
           ),
         ],

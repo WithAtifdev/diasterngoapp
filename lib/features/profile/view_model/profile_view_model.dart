@@ -6,7 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
-import '../model/user_model.dart';
+import '../model/app_user_model.dart';
 import '../services/profile_service.dart';
 enum ProfileState { loading, loaded, saving, error, loggedOut }
 class ProfileViewModel extends ChangeNotifier {

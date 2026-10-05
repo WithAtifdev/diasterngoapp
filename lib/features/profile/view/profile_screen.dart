@@ -1,9 +1,10 @@
 
 import 'package:diaster_ngo_app/features/ngos/widgets/app_card.dart';
-import 'package:diaster_ngo_app/features/profile/model/user_model.dart';
 import 'package:diaster_ngo_app/features/profile/view_model/profile_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../model/app_user_model.dart';
 
 
 
