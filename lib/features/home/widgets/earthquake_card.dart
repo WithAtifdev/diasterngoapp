@@ -6,13 +6,9 @@ import '../../../../core/utils/time_formatter.dart';
 
 class EarthquakeCard extends StatelessWidget {
   final List<EarthquakeModel> quakes;
-  final double userLat;
-  final double userLon;
   const EarthquakeCard({
     super.key,
     required this.quakes,
-    required this.userLat,
-    required this.userLon,
   });
 
   @override
@@ -53,8 +49,10 @@ class EarthquakeCard extends StatelessWidget {
             const Center(
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 16),
-                child: Text('No earthquakes within 500 km in last 24h',
-                    style: TextStyle(color: Colors.white54, fontSize: 13)),
+                child: Text(
+                    'No earthquakes within 250 km in last 24h',
+                    style: TextStyle(
+                        color: Colors.white54, fontSize: 13)),
               ),
             )
           else

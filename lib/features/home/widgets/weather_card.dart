@@ -18,7 +18,8 @@ class WeatherCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _stat('${weather.weatherEmoji} ${weather.temperatureCelsius.toStringAsFixed(1)}°C',
+              _stat('${weather.weatherEmoji}'
+                  ' ${weather.temperatureCelsius.toStringAsFixed(1)}°C',
                   'Temperature'),
               _stat('🌧 ${weather.precipitationMm.toStringAsFixed(1)} mm', 'Rainfall'),
               _stat('💨 ${weather.windSpeedKph.toStringAsFixed(0)} km/h', 'Wind'),
@@ -57,10 +58,12 @@ class WeatherCard extends StatelessWidget {
     children: [
       Text(value,
           style: const TextStyle(
-              color: Colors.white, fontSize: 15, fontWeight: FontWeight.w600)),
+              color: Colors.white,
+              fontSize: 15, fontWeight: FontWeight.w600)),
       const SizedBox(height: 4),
       Text(label,
-          style: const TextStyle(color: Colors.white54, fontSize: 11)),
+          style: const TextStyle(
+              color: Colors.white54, fontSize: 11)),
     ],
   );
 }

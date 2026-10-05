@@ -1,6 +1,4 @@
 
-
-
 import 'package:diaster_ngo_app/core/constants/app_colors.dart';
 import 'package:diaster_ngo_app/features/alerts/model/alert_model.dart';
 import 'package:diaster_ngo_app/features/alerts/view_model/alerts_view_model.dart';
@@ -8,6 +6,8 @@ import 'package:diaster_ngo_app/features/alerts/widgets/gradient_divider.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'alert_details_screen.dart';
 
 
 class AlertsScreen extends StatefulWidget {
@@ -116,7 +116,8 @@ class _AlertsScreenState extends State<AlertsScreen> {
     );
   }
 
-  Widget _statBadge(String value, String label, Color color) => Expanded(
+  Widget _statBadge(String value, String label, Color color)
+  => Expanded(
     child: Container(
       padding: const EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(
@@ -139,71 +140,127 @@ class _AlertsScreenState extends State<AlertsScreen> {
 
 class _AlertCard extends StatelessWidget {
   final AlertModel alert;
-  const _AlertCard({required this.alert});
-
+  const _AlertCard({
+    required this.alert,
+  });
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: AppColors.card,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.white10),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: alert.color.withValues(alpha: 0.12),
-              borderRadius: BorderRadius.circular(10),
+    return InkWell(
+      borderRadius: BorderRadius.circular(16),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => AlertDetailsScreen(
+              alertId: alert.id,
+              title: alert.title,
+              description: alert.description,
+              severity: alert.severity.name,
+              source: alert.sourceLabel,
+              createdAt: alert.createdAt,
             ),
-            child: Icon(alert.icon, color: alert.color, size: 22),
           ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(alert.title,
+        );
+      },
+
+      child: Container(
+        padding: const EdgeInsets.all(14),
+        decoration: BoxDecoration(
+          color: AppColors.card,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: Colors.white10,
+          ),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: alert.color.withValues(alpha: 0.12),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Icon(
+                alert.icon,
+                color: alert.color,
+                size: 22,
+              ),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          alert.title,
                           style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600)),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                      decoration: BoxDecoration(
-                        color: alert.color.withValues(alpha: 0.15),
-                        borderRadius: BorderRadius.circular(4),
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
                       ),
-                      child: Text(alert.sourceLabel,
-                          style: TextStyle(color: alert.color, fontSize: 10)),
+
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 6,
+                          vertical: 2,
+                        ),
+                        decoration: BoxDecoration(
+                          color: alert.color.withValues(alpha: 0.15),
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: Text(
+                          alert.sourceLabel,
+                          style: TextStyle(
+                            color: alert.color,
+                            fontSize: 10,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 5),
+
+                  Text(
+                    alert.description,
+                    style: const TextStyle(
+                      color: Colors.white70,
+                      fontSize: 13,
                     ),
-                  ],
-                ),
-                const SizedBox(height: 5),
-                Text(alert.description,
-                    style: const TextStyle(color: Colors.white70, fontSize: 13),
                     maxLines: 3,
-                    overflow: TextOverflow.ellipsis),
-                const SizedBox(height: 8),
-                Row(
-                  children: [
-                    Icon(Icons.access_time, size: 12, color: Colors.white38),
-                    const SizedBox(width: 4),
-                    Text(alert.timeLabel,
-                        style: const TextStyle(color: Colors.white38, fontSize: 12)),
-                  ],
-                ),
-              ],
+                    overflow: TextOverflow.ellipsis,
+                  ),
+
+                  const SizedBox(height: 8),
+
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.access_time,
+                        size: 12,
+                        color: Colors.white38,
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        alert.timeLabel,
+                        style: const TextStyle(
+                          color: Colors.white38,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -130,10 +130,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
                 SizedBox(height: 20,),
-
                 // ── Overall Risk Banner ──
                 RiskBanner(risk: d.overallRisk),
-
                 const SizedBox(height: 20),
                 WeatherCard(weather: d.weather),
                 const SizedBox(height: 16),
@@ -141,8 +139,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 // ── Earthquake Card ──
                 EarthquakeCard(
                   quakes: d.nearbyEarthquakes,
-                  userLat: d.latitude,
-                  userLon: d.longitude,
                 ),
                 const SizedBox(height: 16),
 

@@ -20,12 +20,12 @@ class FloodModel {
     final latest = discharges.isNotEmpty ? discharges.last : 0.0;
     return FloodModel(
       riverDischarge: latest,
-      riskLabel:      _label(latest),
+      riskLabel:      label(latest),
       fetchedAt:      DateTime.now(),
     );
   }
 
-  static String _label(double discharge) {
+  static String label(double discharge) {
     if (discharge > 500) return 'SEVERE';
     if (discharge > 200) return 'HIGH';
     if (discharge > 80)  return 'MODERATE';

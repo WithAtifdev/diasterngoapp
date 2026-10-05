@@ -12,35 +12,23 @@ class AlertsViewModel extends ChangeNotifier {
 
   List<AlertModel> _officialAlerts = [];
   List<AlertModel> _liveAlerts = [];
-
   bool _isLoadingLive = false;
   bool _initialized = false;
-
   String? _error;
-
   StreamSubscription? _firestoreSub;
-
   List<AlertModel> get officialAlerts => _officialAlerts;
-
   List<AlertModel> get liveAlerts => _liveAlerts;
-
   bool get isLoadingLive => _isLoadingLive;
-
   String? get error => _error;
 
   /// =========================
   /// MERGED ALERTS
   /// =========================
   List<AlertModel> get allAlerts {
-    final merged = [
-      ..._officialAlerts,
-      ..._liveAlerts,
-    ];
-
+    final merged = [..._officialAlerts, ..._liveAlerts];
     merged.sort(
           (a, b) => b.createdAt.compareTo(a.createdAt),
     );
-
     return merged;
   }
 
@@ -52,17 +40,13 @@ class AlertsViewModel extends ChangeNotifier {
         return a.severity == AlertSeverity.extreme ||
             a.severity == AlertSeverity.high;
       }).toList();
-
   /// =========================
   /// INITIALIZE
   /// =========================
   void initialize() {
     if (_initialized) return;
-
     _initialized = true;
-
     _subscribeToFirestore();
-
     // Load in background
     Future.microtask(() {
       fetchLiveAlerts();

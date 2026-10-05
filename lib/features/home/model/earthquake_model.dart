@@ -52,24 +52,18 @@ class EarthquakeModel {
 
   /// Distance in km from a reference point (Haversine)
   double distanceFromKm(double lat, double lon) {
-
     const r = 6371.0;
-
     final dLat = _rad(latitude - lat);
     final dLon = _rad(longitude - lon);
-
-    final a =
-        math.sin(dLat / 2) * math.sin(dLat / 2) +
+    final a = math.sin(dLat / 2) * math.sin(dLat / 2) +
             math.cos(_rad(lat)) *
                 math.cos(_rad(latitude)) *
                 math.sin(dLon / 2) *
                 math.sin(dLon / 2);
 
     final c = 2 * math.asin(math.sqrt(a));
-
     return r * c;
   }
-
   static double _rad(double deg) {
     return deg * math.pi / 180;
   }

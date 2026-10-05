@@ -11,7 +11,10 @@ class ApiConstants {
 
   // USGS Earthquake Feed ()
   static const String earthquakeUrl =
-      'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_day.geojson';
+      'https://earthquake.usgs.gov/fdsnws/event/1/query';
+
+  // static const String earthquakeUrl =
+  //     'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_day.geojson';
 
   // Nominatim reverse geocoding ()
   static const String geocodeUrl =
@@ -22,4 +25,7 @@ class ApiConstants {
       'https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH';
 
   static const int timeoutSeconds = 15;
+
+  // Earthquake search radius
+  static const double earthquakeRadiusKm = 250;
 }
