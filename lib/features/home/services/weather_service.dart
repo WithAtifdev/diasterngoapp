@@ -5,14 +5,11 @@ import '../../../core/network/network_api_service.dart';
 
 class WeatherService {
   final NetworkApiService _apiService = NetworkApiService();
-
   Future<WeatherModel> fetch({
     required double lat,
     required double lon,
   }) async {
-    final uri = Uri.parse(
-      ApiConstants.weatherUrl,
-    ).replace(
+    final uri = Uri.parse(ApiConstants.weatherUrl).replace(
       queryParameters: {
         'latitude': lat.toString(),
         'longitude': lon.toString(),
@@ -26,18 +23,10 @@ class WeatherService {
           'uv_index',
         ].join(','),
         'timezone': 'auto',
-        'forecast_days': '1',
       },
     );
-
     try {
-      final data = await _apiService.getApi(
-        uri.toString(),
-        headers: {
-          'Accept': 'application/json',
-        },
-      );
-
+      final data = await _apiService.getApi(uri.toString());
       return WeatherModel.fromJson(data);
     } catch (_) {
       return WeatherModel.empty();

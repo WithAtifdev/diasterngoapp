@@ -1,5 +1,5 @@
 class FloodModel {
-  final double riverDischarge; // m³/s — higher = more flooding risk
+  final double riverDischarge;
   final String riskLabel;
   final DateTime fetchedAt;
 
@@ -10,18 +10,14 @@ class FloodModel {
   });
 
   factory FloodModel.fromJson(Map<String, dynamic> json) {
-    // Open-Meteo Flood returns hourly river_discharge array
-    final hourly = json['hourly'] as Map<String, dynamic>? ?? {};
-    final discharges = (hourly['river_discharge'] as List?)
-        ?.whereType<num>()
-        .map((e) => e.toDouble())
-        .toList() ??
-        [0.0];
+    final daily = json['daily'] as Map<String, dynamic>? ?? {};
+    final discharges = (daily['river_discharge_mean'] as List?)
+   ?.whereType<num>().map((e) => e.toDouble()).toList() ?? [0.0];
     final latest = discharges.isNotEmpty ? discharges.last : 0.0;
     return FloodModel(
       riverDischarge: latest,
-      riskLabel:      label(latest),
-      fetchedAt:      DateTime.now(),
+      riskLabel: label(latest),
+      fetchedAt: DateTime.now(),
     );
   }
 
@@ -37,4 +33,5 @@ class FloodModel {
     riskLabel: 'UNKNOWN',
     fetchedAt: DateTime.now(),
   );
+
 }

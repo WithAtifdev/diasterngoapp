@@ -13,17 +13,13 @@ import '../../../core/constants/app_colors.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
-
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
-
 class _HomeScreenState extends State<HomeScreen> {
-
   @override
   void initState() {
     super.initState();
-
     final vm = context.read<HomeViewModel>();
     if (vm.dashboard == null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -113,7 +109,6 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 const GradientDivider(),
                 const SizedBox(height: 20),
-
                 // Location header
                 Row(
                   children: [
@@ -121,12 +116,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(width: 6),
                     Expanded(
                       child: Text(
-                        '${d.locationName}, ${d.country}',
+                        d.location,
                         style: const TextStyle(
-                            color: Colors.white, fontSize: 16, fontWeight: FontWeight.w600),
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
-
                   ],
                 ),
                 SizedBox(height: 20,),

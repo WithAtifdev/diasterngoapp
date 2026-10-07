@@ -83,8 +83,12 @@ class AlertService {
         alerts.add(
           AlertModel.fromWeather(
             weather,
-            loc.city,
+            loc.location,
           ),
+          // AlertModel.fromWeather(
+          //   weather,
+          //   loc.city,
+          // ),
         );
       }
       // ----------------------------------------------------------
@@ -99,8 +103,12 @@ class AlertService {
         alerts.add(
           AlertModel.fromFlood(
             flood,
-            loc.city,
+            loc.location,
           ),
+          // AlertModel.fromFlood(
+          //   flood,
+          //   loc.city,
+          // ),
         );
       }
       // ----------------------------------------------------------

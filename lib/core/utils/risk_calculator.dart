@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:diaster_ngo_app/features/home/model/earthquake_model.dart';
 import 'package:diaster_ngo_app/features/home/model/flood_model.dart';
 import 'package:diaster_ngo_app/features/home/model/weather_model.dart';
-
 import '../constants/app_colors.dart';
 
 enum RiskLevel {extreme, high, medium,low}
@@ -11,12 +10,11 @@ enum RiskLevel {extreme, high, medium,low}
 class RiskResult {
   final RiskLevel level;
   final int score;
-  final List<String> activeThreats;
-
+   final List<String> activeThreats;
   const RiskResult({
     required this.level,
     required this.score,
-    required this.activeThreats,
+     required this.activeThreats,
   });
 }
 
@@ -30,13 +28,10 @@ class RiskCalculator {
     final threats = <String>[];
     int score = 0;
 
-    final strongQuakes = nearbyQuakes
-        .where((q) => q.magnitude >= 5.0)
-        .toList();
+  final strongQuakes = nearbyQuakes
+      .where((q) => q.magnitude >= 5.0).toList();
     final moderateQuakes = nearbyQuakes
-        .where((q) => q.magnitude >= 3.5 && q.magnitude < 5.0)
-        .toList();
-
+        .where((q) => q.magnitude >= 3.5 && q.magnitude < 5.0).toList();
     if (strongQuakes.isNotEmpty) {
       score += 40;
       threats.add(
@@ -46,7 +41,6 @@ class RiskCalculator {
       score += 20;
       threats.add('Seismic Activity');
     }
-
 
     if (flood.riverDischarge > 500) {
       score += 35;

@@ -2,6 +2,7 @@
 
 import 'package:diaster_ngo_app/features/auth/view/Forgotpassword.dart';
 import 'package:diaster_ngo_app/features/auth/view/Splasch_screen.dart';
+import 'package:diaster_ngo_app/features/auth/view/auth_wrapper.dart';
 import 'package:diaster_ngo_app/features/auth/view/sigin.dart';
 import 'package:diaster_ngo_app/features/auth/view/signup.dart';
 import 'package:diaster_ngo_app/navigationmenu.dart';
@@ -11,7 +12,7 @@ import 'routes_name.dart';
 
 
 
-class Routes {
+class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
 
@@ -25,7 +26,7 @@ class Routes {
         return MaterialPageRoute(builder: (BuildContext context) => const Signup());
 
       case RoutesName.authwrapper:
-        return MaterialPageRoute(builder: (BuildContext context) => const Signup());
+        return MaterialPageRoute(builder: (BuildContext context) => const AuthWrapper());
 
       case RoutesName.forgotpassword:
         return MaterialPageRoute(builder: (BuildContext context) =>
